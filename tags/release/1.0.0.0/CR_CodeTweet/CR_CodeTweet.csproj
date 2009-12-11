@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4BDACA9D-D6CA-4F16-828E-5297B822A4C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CR_CodeTweet</RootNamespace>
+    <AssemblyName>CR_CodeTweet</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CR_CodeTweet.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\CR_CodeTweet.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.CodeRush.Interop" />
+    <Reference Include="Extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="EnvDTE" />
+    <Reference Include="EnvDTE80" />
+    <Reference Include="DevExpress.CodeRush.Common" />
+    <Reference Include="DevExpress.CodeRush.Core" />
+    <Reference Include="DevExpress.CodeRush.PlugInCore" />
+    <Reference Include="DevExpress.CodeRush.StructuralParser" />
+    <Reference Include="DevExpress.CodeRush.VSCore" />
+    <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="ByteExtensions.cs" />
+    <Compile Include="CodeTweet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CodeTweet.Designer.cs">
+      <DependentUpon>CodeTweet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DecoupledStorageExtensions.cs" />
+    <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="IOAuthInfoProvider.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="OAuthRequestType.cs" />
+    <Compile Include="OAuthSignature.cs" />
+    <Compile Include="OAuthSignatureBuilder.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="PluginOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PluginOptions.Designer.cs">
+      <DependentUpon>PluginOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PostedSnippetInfo.cs" />
+    <Compile Include="Properties\ProductConstants.cs" />
+    <Compile Include="ProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgressDialog.Designer.cs">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SnippetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SnippetDialog.Designer.cs">
+      <DependentUpon>SnippetDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SnippetDialogResult.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="TweetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TweetDialog.Designer.cs">
+      <DependentUpon>TweetDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TweetFailedException.cs" />
+    <Compile Include="TwitterClient.cs" />
+    <Compile Include="TwitterInfoProvider.cs" />
+    <Compile Include="TwitterPinDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TwitterPinDialog.Designer.cs">
+      <DependentUpon>TwitterPinDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CodePaste\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WebRequestMethod.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CodeTweet.resx">
+      <DependentUpon>CodeTweet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluginOptions.resx">
+      <DependentUpon>PluginOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgressDialog.resx">
+      <DependentUpon>ProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SnippetDialog.resx">
+      <DependentUpon>SnippetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TweetDialog.resx">
+      <DependentUpon>TweetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwitterPinDialog.resx">
+      <DependentUpon>TwitterPinDialog.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://codepaste.net/services/codepastesoapservice.asmx">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\CodePaste\</RelPath>
+      <UpdateFromURL>http://codepaste.net/services/codepastesoapservice.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CR_CodeTweet_CodePaste_CodePasteSoapService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CodePaste\codepastesoapservice.disco" />
+    <None Include="Web References\CodePaste\codepastesoapservice.wsdl" />
+    <None Include="Web References\CodePaste\CodeSnippet.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CodePaste\Comment.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CodePaste\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CodePaste\Snippet.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ContextButtonIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ContextButtonIcon1.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>del "$(TargetDir)$(TargetName).XmlSerializers.dll"
+xcopy "$(TargetDir)$(TargetName).*" "%25USERPROFILE%25\My Documents\DevExpress\IDE Tools\Community\PlugIns\" /y</PostBuildEvent>
+  </PropertyGroup>
+</Project>

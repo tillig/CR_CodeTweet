@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CodePaste_UnableToDeleteSnippet" xml:space="preserve">
+    <value>We tried to delete the snippet you posted but couldn't. Try visiting CodePaste.NET manually to see if you have better luck than us.</value>
+  </data>
+  <data name="CodePaste_UnableToLoginMessage" xml:space="preserve">
+    <value>Unfortunately, we can't establish a session with CodePaste.NET... so we can't post your snippet.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ContextButtonIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ContextButtonIcon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ContextButtonIconMask" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ContextButtonIcon1.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ContextMenu_TweetButton" xml:space="preserve">
+    <value>Tweet This!</value>
+  </data>
+  <data name="ContextMenu_TweetButtonDescription" xml:space="preserve">
+    <value>Sends the selected code snippet to CodePaste.NET and tweets a link to the snippet.</value>
+  </data>
+  <data name="Dialog_GetTwitterPinFailed" xml:space="preserve">
+    <value>For some reason, we couldn't communicate correctly with Twitter. Try again later. (For details on what happened, check the DevExpress message log.)</value>
+  </data>
+  <data name="Dialog_GetTwitterPinMessage" xml:space="preserve">
+    <value>We need to send you to Twitter to get a PIN and authorize this app. It'll ask you to allow/deny the app - click "allow" and then copy the PIN it gives and paste it into the settings here. Are you ready to go?</value>
+  </data>
+  <data name="Dialog_GetTwitterPinSuccess" xml:space="preserve">
+    <value>You've successfully authorized CR_CodeTweet to communicate with Twitter! Awesome!</value>
+  </data>
+  <data name="Dialog_GetTwitterPinTitle" xml:space="preserve">
+    <value>Getting a Twitter PIN</value>
+  </data>
+  <data name="Dialog_TweetCanceledMessage" xml:space="preserve">
+    <value>You canceled the tweet but the snippet got posted. Would you like to delete the snippet?</value>
+  </data>
+  <data name="Dialog_TweetCanceledTitle" xml:space="preserve">
+    <value>Delete the snippet?</value>
+  </data>
+  <data name="Dialog_TweetFailedDeleteSnippetMessage" xml:space="preserve">
+    <value>The tweet failed but the snippet got posted. Do you want to delete the snippet?</value>
+  </data>
+  <data name="Dialog_TweetFailedMessage" xml:space="preserve">
+    <value>It doesn't look like we could post your code snippet and/or get that thing to Twitter.</value>
+  </data>
+  <data name="Dialog_TweetFailedTitle" xml:space="preserve">
+    <value>Failed to Post/Tweet</value>
+  </data>
+  <data name="Dialog_UnexpectedException" xml:space="preserve">
+    <value>Something happened that we weren't expecting. We're gonna have to just bail for now, but you're free to try again if you want. We put some detail in the DXCore event log, but here's the short version:</value>
+  </data>
+  <data name="Exception_TweetFailedMessage" xml:space="preserve">
+    <value>The operation to post a code snippet and tweet a link failed.</value>
+  </data>
+  <data name="Options_CodePasteNotConfigured" xml:space="preserve">
+    <value>Your CodePaste.NET credentials don't appear to be configured. Please make sure you have specified the username and address with which you log into CodePaste.NET.</value>
+  </data>
+  <data name="Options_NotConfiguredTitle" xml:space="preserve">
+    <value>CodeTweet Options Not Configured</value>
+  </data>
+  <data name="Options_TwitterNotConfigured" xml:space="preserve">
+    <value>You don't appear to have authorized CodeTweet to use Twitter. Please make sure you get an OAuth PIN from Twitter and configure CodeTweet. You can get a PIN from the CodeTweet options page.</value>
+  </data>
+  <data name="Options_WantToConfigure" xml:space="preserve">
+    <value>Would you like to visit the options page to check your settings?</value>
+  </data>
+  <data name="Progress_ConnectedToCodePaste" xml:space="preserve">
+    <value>The flying monkeys are ready to take your code to CodePaste.NET.</value>
+  </data>
+  <data name="Progress_ConnectingToCodePaste" xml:space="preserve">
+    <value>Prepping the flying monkeys for a trip to CodePaste.NET...</value>
+  </data>
+  <data name="Progress_DeletedSnippet" xml:space="preserve">
+    <value>The monkeys successfully nuked that snippet!</value>
+  </data>
+  <data name="Progress_DeleteSnippetFailed" xml:space="preserve">
+    <value>The monkeys couldn't nuke your snippet.</value>
+  </data>
+  <data name="Progress_DeletingSnippet" xml:space="preserve">
+    <value>Sending the monkeys back to CodePaste.NET to delete the snippet...</value>
+  </data>
+  <data name="Progress_PostedSnippet" xml:space="preserve">
+    <value>The monkeys delivered the snippet to CodePaste.NET.</value>
+  </data>
+  <data name="Progress_UnableToGetCodePasteSession" xml:space="preserve">
+    <value>CodePaste.NET is denying access to the monkeys...</value>
+  </data>
+  <data name="Twitter_AuthorizationFailed" xml:space="preserve">
+    <value>Authorization with Twitter failed.</value>
+  </data>
+  <data name="Twitter_ServerError" xml:space="preserve">
+    <value>There was an unexpected error in the Twitter service.</value>
+  </data>
+  <data name="CodePaste_UnableToPostSnippet" xml:space="preserve">
+    <value>CodePaste.NET just wasn't accepting that snippet. Logged in fine but couldn't post. Weird. Make sure you're not trying to post a duplicate snippet - CodePaste checks for that.</value>
+  </data>
+  <data name="Dialog_SnippetDeletedMessage" xml:space="preserve">
+    <value>The snippet was successfully deleted.</value>
+  </data>
+  <data name="Dialog_SnippetDeletedTitle" xml:space="preserve">
+    <value>Snippet deleted!</value>
+  </data>
+  <data name="Dialog_TweetSentMessage" xml:space="preserve">
+    <value>Your snippet was successfully tweeted.</value>
+  </data>
+  <data name="Dialog_TweetSentTitle" xml:space="preserve">
+    <value>Tweet sent!</value>
+  </data>
+  <data name="Progress_PostedTweet" xml:space="preserve">
+    <value>The ninjas posted your tweet!</value>
+  </data>
+  <data name="Progress_PostingTweet" xml:space="preserve">
+    <value>Handing the tweet over to the Twitter ninjas...</value>
+  </data>
+  <data name="Progress_TweetFailed" xml:space="preserve">
+    <value>The ninjas refuse to post that tweet. Are they busy fighting a whale?</value>
+  </data>
+  <data name="Progress_UnableToPostSnippet" xml:space="preserve">
+    <value>CodePaste.NET refused the offering of the snippet...</value>
+  </data>
+</root>
