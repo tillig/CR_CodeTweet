@@ -28,8 +28,16 @@ While in Visual Studio, select some code in the editor that you'd like to post t
 
 Right-click on the selected code and select "Tweet This!" or use the hotkey you bound to the "Tweet This Code" action during installation. This will start the process of posting the code.
 
+http://cr-codetweet.googlecode.com/svn/site/screenshots/context-menu.png
+
 Fill in the optional information about your code snippet and post it.
+
+http://cr-codetweet.googlecode.com/svn/site/screenshots/snippet-info-dialog.png
 
 Fill in the body of your tweet and send it off. The URL to the snippet on !CodePaste.NET will be automatically appended.
 
+http://cr-codetweet.googlecode.com/svn/site/screenshots/tweet-info-dialog.png
+
 Check Twitter and you'll see your snippet!
+
+http://cr-codetweet.googlecode.com/svn/site/screenshots/tweet-rendered.png
