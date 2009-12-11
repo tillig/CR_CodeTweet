@@ -206,6 +206,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)$(TargetName).*" "%25USERPROFILE%25\My Documents\DevExpress\IDE Tools\Community\PlugIns\" /y</PostBuildEvent>
+    <PostBuildEvent>del "$(TargetDir)$(TargetName).XmlSerializers.dll"
+xcopy "$(TargetDir)$(TargetName).*" "%25USERPROFILE%25\My Documents\DevExpress\IDE Tools\Community\PlugIns\" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
