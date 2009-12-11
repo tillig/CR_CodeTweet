@@ -1,4 +1,4 @@
-#summary Describes how to install and use CR`_`!CodeTweet
+#summary Describes how to install and use CR_CodeTweet
 #labels Featured,Phase-Deploy
 
 = Prerequisites =
