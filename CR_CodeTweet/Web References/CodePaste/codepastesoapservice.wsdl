@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://codepaste.net/soap" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://codepaste.net/soap" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://codepaste.net/soap">
+      <s:element name="GetSnippet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSnippetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSnippetResult" type="tns:CodeSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CodeSnippet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPrivate" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShowLineNumbers" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Author" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Theme" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAbuse" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Entered" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Views" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTemporary" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="tns:User" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:ArrayOfComment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastLanguage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAdmin" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Visits" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Snippets" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Updated" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Entered" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="OpenId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OpenIdClaim" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfComment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Comment" nillable="true" type="tns:Comment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Comment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SnippetId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommentText" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Author" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Entered" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetNewSnippet">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetNewSnippetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNewSnippetResult" type="tns:CodeSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecentSnippets">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRecentSnippetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRecentSnippetsResult" type="tns:ArrayOfSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSnippet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Snippet" nillable="true" type="tns:Snippet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Snippet">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:CodeSnippet">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CommentCount" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="GetSnippetsForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSnippetsForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSnippetsForUserResult" type="tns:ArrayOfSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchSnippets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchParameters" type="tns:CodeSnippetSearchParameters" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CodeSnippetSearchParameters">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SearchString" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tags" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Author" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SearchOrder" type="tns:SearchOrderTypes" />
+          <s:element minOccurs="1" maxOccurs="1" name="DisplayCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalResultCount" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SearchOrderTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Entered" />
+          <s:enumeration value="Title" />
+          <s:enumeration value="Author" />
+          <s:enumeration value="Views" />
+          <s:enumeration value="None" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SearchSnippetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchSnippetsResult" type="tns:ArrayOfSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommentsForSnippet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snippetId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCommentsForSnippetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCommentsForSnippetResult" type="tns:ArrayOfComment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostNewCodeSnippet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snippet" type="tns:CodeSnippet" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostNewCodeSnippetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PostNewCodeSnippetResult" type="tns:CodeSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSnippet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="snippetId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sessionKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteSnippetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteSnippetResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSessionKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSessionKeyResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSnippets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filterParameter" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSnippetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListSnippetsResult" type="tns:ArrayOfSnippet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSnippetSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSnippet" />
+  </wsdl:message>
+  <wsdl:message name="GetSnippetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSnippetSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNewSnippet" />
+  </wsdl:message>
+  <wsdl:message name="GetNewSnippetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNewSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSnippetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRecentSnippets" />
+  </wsdl:message>
+  <wsdl:message name="GetRecentSnippetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRecentSnippetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSnippetsForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSnippetsForUser" />
+  </wsdl:message>
+  <wsdl:message name="GetSnippetsForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSnippetsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchSnippetsSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchSnippets" />
+  </wsdl:message>
+  <wsdl:message name="SearchSnippetsSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchSnippetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCommentsForSnippetSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCommentsForSnippet" />
+  </wsdl:message>
+  <wsdl:message name="GetCommentsForSnippetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCommentsForSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostNewCodeSnippetSoapIn">
+    <wsdl:part name="parameters" element="tns:PostNewCodeSnippet" />
+  </wsdl:message>
+  <wsdl:message name="PostNewCodeSnippetSoapOut">
+    <wsdl:part name="parameters" element="tns:PostNewCodeSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSnippetSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteSnippet" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSnippetSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionKeySoapIn">
+    <wsdl:part name="parameters" element="tns:GetSessionKey" />
+  </wsdl:message>
+  <wsdl:message name="GetSessionKeySoapOut">
+    <wsdl:part name="parameters" element="tns:GetSessionKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListSnippetsSoapIn">
+    <wsdl:part name="parameters" element="tns:ListSnippets" />
+  </wsdl:message>
+  <wsdl:message name="ListSnippetsSoapOut">
+    <wsdl:part name="parameters" element="tns:ListSnippetsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CodePasteSoapService">
+    <wsdl:operation name="GetSnippet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns an individual snippet based on an Id</wsdl:documentation>
+      <wsdl:input message="tns:GetSnippetSoapIn" />
+      <wsdl:output message="tns:GetSnippetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSnippet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a new empty snippet to the client. The snippet contains a new id.</wsdl:documentation>
+      <wsdl:input message="tns:GetNewSnippetSoapIn" />
+      <wsdl:output message="tns:GetNewSnippetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSnippets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of recent snippets</wsdl:documentation>
+      <wsdl:input message="tns:GetRecentSnippetsSoapIn" />
+      <wsdl:output message="tns:GetRecentSnippetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSnippetsForUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of snippets for a given user's id</wsdl:documentation>
+      <wsdl:input message="tns:GetSnippetsForUserSoapIn" />
+      <wsdl:output message="tns:GetSnippetsForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchSnippets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows searching of snippets by providing a search parameter structure</wsdl:documentation>
+      <wsdl:input message="tns:SearchSnippetsSoapIn" />
+      <wsdl:output message="tns:SearchSnippetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentsForSnippet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve comments for a given snippet</wsdl:documentation>
+      <wsdl:input message="tns:GetCommentsForSnippetSoapIn" />
+      <wsdl:output message="tns:GetCommentsForSnippetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostNewCodeSnippet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Allows posting of a new Code Snippet to the service</wsdl:documentation>
+      <wsdl:input message="tns:PostNewCodeSnippetSoapIn" />
+      <wsdl:output message="tns:PostNewCodeSnippetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSnippet">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an individual snippet</wsdl:documentation>
+      <wsdl:input message="tns:DeleteSnippetSoapIn" />
+      <wsdl:output message="tns:DeleteSnippetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Login method for update operations agains the API that returns a session key</wsdl:documentation>
+      <wsdl:input message="tns:GetSessionKeySoapIn" />
+      <wsdl:output message="tns:GetSessionKeySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CodePasteSoapServiceSoap">
+    <wsdl:operation name="ListSnippets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generic snippet list method where filters are Recent, Tag, User, Language and parameters are empty, tag name, user id or language respectively</wsdl:documentation>
+      <wsdl:input message="tns:ListSnippetsSoapIn" />
+      <wsdl:output message="tns:ListSnippetsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CodePasteSoapService" type="tns:CodePasteSoapService">
+    <wsdl:documentation>
+      <wsi:Claim conformsTo="http://ws-i.org/profiles/basic/1.1" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" />
+    </wsdl:documentation>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSnippet">
+      <soap:operation soapAction="http://codepaste.net/soap/GetSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSnippet">
+      <soap:operation soapAction="http://codepaste.net/soap/GetNewSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSnippets">
+      <soap:operation soapAction="http://codepaste.net/soap/GetRecentSnippets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnippetsForUser">
+      <soap:operation soapAction="http://codepaste.net/soap/GetSnippetsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchSnippets">
+      <soap:operation soapAction="http://codepaste.net/soap/SearchSnippets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentsForSnippet">
+      <soap:operation soapAction="http://codepaste.net/soap/GetCommentsForSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostNewCodeSnippet">
+      <soap:operation soapAction="http://codepaste.net/soap/PostNewCodeSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSnippet">
+      <soap:operation soapAction="http://codepaste.net/soap/DeleteSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionKey">
+      <soap:operation soapAction="http://codepaste.net/soap/GetSessionKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CodePasteSoapServiceSoap" type="tns:CodePasteSoapServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListSnippets">
+      <soap:operation soapAction="http://codepaste.net/soap/ListSnippets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CodePasteSoapService1" type="tns:CodePasteSoapService">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSnippet">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetSnippet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewSnippet">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetNewSnippet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecentSnippets">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetRecentSnippets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSnippetsForUser">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetSnippetsForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchSnippets">
+      <soap12:operation soapAction="http://codepaste.net/soap/SearchSnippets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommentsForSnippet">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetCommentsForSnippet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostNewCodeSnippet">
+      <soap12:operation soapAction="http://codepaste.net/soap/PostNewCodeSnippet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSnippet">
+      <soap12:operation soapAction="http://codepaste.net/soap/DeleteSnippet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSessionKey">
+      <soap12:operation soapAction="http://codepaste.net/soap/GetSessionKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CodePasteSoapServiceSoap12" type="tns:CodePasteSoapServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListSnippets">
+      <soap12:operation soapAction="http://codepaste.net/soap/ListSnippets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CodePasteSoapService">
+    <wsdl:port name="CodePasteSoapService" binding="tns:CodePasteSoapService">
+      <soap:address location="http://codepaste.net/services/codepastesoapservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CodePasteSoapServiceSoap" binding="tns:CodePasteSoapServiceSoap">
+      <soap:address location="http://codepaste.net/services/codepastesoapservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CodePasteSoapService1" binding="tns:CodePasteSoapService1">
+      <soap12:address location="http://codepaste.net/services/codepastesoapservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CodePasteSoapServiceSoap12" binding="tns:CodePasteSoapServiceSoap12">
+      <soap12:address location="http://codepaste.net/services/codepastesoapservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
