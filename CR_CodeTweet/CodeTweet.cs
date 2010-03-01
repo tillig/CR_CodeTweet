@@ -50,9 +50,16 @@ namespace CR_CodeTweet
 			this.ContextMenuButton = editorContextMenu.AddButton();
 			this.ContextMenuButton.Caption = Properties.Resources.ContextMenu_TweetButton;
 			this.ContextMenuButton.Enabled = this.Available;
-			this.ContextMenuButton.DescriptionText = Properties.Resources.ContextMenu_TweetButtonDescription;
-			this.ContextMenuButton.Face = Properties.Resources.ContextButtonIcon.ToBitmap();
-			this.ContextMenuButton.Mask = Properties.Resources.ContextButtonIconMask.ToBitmap();
+			try
+			{
+				this.ContextMenuButton.DescriptionText = Properties.Resources.ContextMenu_TweetButtonDescription;
+			}
+			catch (InvalidOperationException)
+			{
+				// VS2010 doesn't allow you to set the description text,
+				// but VS2008 does.
+			}
+			this.ContextMenuButton.SetFace(Properties.Resources.ContextButtonIcon.ToBitmap(), Properties.Resources.ContextButtonIconMask.ToBitmap());
 			this.ContextMenuButton.Click += new MenuButtonClickEventHandler(ContextMenuButton_Click);
 		}
 
