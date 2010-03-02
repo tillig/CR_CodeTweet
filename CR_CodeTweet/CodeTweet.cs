@@ -48,6 +48,7 @@ namespace CR_CodeTweet
 		{
 			MenuBar editorContextMenu = DevExpress.CodeRush.VSCore.Manager.Menus.Bars[VsCommonBar.EditorContext];
 			this.ContextMenuButton = editorContextMenu.AddButton();
+			this.ContextMenuButton.Style = ButtonStyle.IconAndCaption;
 			this.ContextMenuButton.Caption = Properties.Resources.ContextMenu_TweetButton;
 			this.ContextMenuButton.Enabled = this.Available;
 			try
