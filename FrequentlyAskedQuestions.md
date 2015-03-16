@@ -1,0 +1,9 @@
+# Q: Why can't I use OpenID with CodePaste.NET? #
+
+Unfortunately, the CodePaste.NET web service API does not allow OpenID as an authentication method. As such, the only way to programmatically access the service is using the standard username/password authentication.
+
+# Q: Why did I get an error while communicating with Twitter? #
+
+You must be new to Twitter and its reliability problems. Go [Google "fail whale."](http://www.google.com/search?q=fail+whale) Twitter's not known for its uptime or stability.
+
+Basically, if you have problems... try again later. Check to ensure that Twitter's actually up, isn't being flaky, and there isn't a problem where you've got something blocked by a firewall. If it's not being blocked, give it a day. If it's still not back, go look in the DevExpress message log, grab the error information, and [file an issue](http://code.google.com/p/cr-codetweet/issues/list). We'll see if we can't fix you up.
