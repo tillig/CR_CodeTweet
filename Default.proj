@@ -4,6 +4,7 @@
 		* Standard build = msbuild Default.proj
 		* Release build = msbuild Default.proj /p:Configuration=Release
 	-->
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 	<PropertyGroup>
 		<Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
 		<BuildDir>..\build</BuildDir>
@@ -19,7 +20,6 @@
 		<CleanFolders Include="CR_CodeTweetTests\bin"/>
 		<CleanFolders Include="CR_CodeTweetTests\obj"/>
 	</ItemGroup>
-	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 	<Target Name="All">
 		<CallTarget Targets="Clean;Compile;Test"/>
 		<CallTarget Targets="Package" Condition="'$(Configuration)' == 'Release'"/>
@@ -57,9 +57,10 @@
 		<CreateProperty Value="%(AssemblyIdentities.Version)">
 			<Output PropertyName="Version" TaskParameter="Value"/>
 		</CreateProperty>
-		<CreateItem Include="$(BuildBinDir)\CR_CodeTweet.dll;readme.html">
+		<CreateItem Include="$(BuildBinDir)\CR_CodeTweet.dll;readme.md">
 			<Output ItemName="BinaryPackageFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Zip Files="@(BinaryPackageFiles)" ZipFileName="$(BuildPackageDir)\CR_CodeTweet-$(Version).zip" Flatten="true"/>
+		<Copy SourceFiles="$(BuildBinDir)\CR_CodeTweet.vsix" DestinationFolder="$(BuildPackageDir)"/>
 	</Target>
 </Project>

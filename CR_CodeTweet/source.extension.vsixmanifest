@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+	<Metadata>
+		<Identity Id="CR_CodeTweet" Version="2.0.0" Language="en-US" Publisher="CR_CodeTweet Contributors" />
+		<DisplayName>CR_CodeTweet</DisplayName>
+		<Description xml:space="preserve">CR_CodeTweet is a plugin for DXCore that adds a context menu and hotkey that allows you to select code in Visual Studio and automatically post it to CodePaste.NET, then tweet a link to that posted snippet - all without leaving Visual Studio.</Description>
+		<MoreInfo>https://github.com/tillig/CR_CodeTweet/</MoreInfo>
+		<License>license.txt</License>
+		<GettingStartedGuide></GettingStartedGuide>
+		<Icon>VsixIcon.png</Icon>
+		<PreviewImage>VsixPreview.png</PreviewImage>
+		<Tags>DevExpress, plugin, refactor, DXperience, CodeRush, DXCore</Tags>
+	</Metadata>
+	<Installation>
+		<InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0,15.0)" />
+		<InstallationTarget Version="[12.0,15.0)" Id="Microsoft.VisualStudio.Community" />
+		<InstallationTarget Version="[12.0,15.0)" Id="Microsoft.VisualStudio.Enterprise" />
+	</Installation>
+	<Dependencies>
+		<Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+		<Dependency d:Source="Installed" Id="DevExpress.DXCore.MefComponents" DisplayName="CodeRush" Version="[14.2,)" d:InstallSource="Download" Location="https://visualstudiogallery.msdn.microsoft.com/F9CDA5D8-10AF-4CC6-9D17-207222A3FD13" />
+	</Dependencies>
+	<Assets>
+		<Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+	</Assets>
+</PackageManifest>

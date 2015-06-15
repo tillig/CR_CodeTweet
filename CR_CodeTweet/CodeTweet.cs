@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using CR_CodeTweet.CodePaste;
 using DevExpress.CodeRush.Core;
 using DevExpress.CodeRush.Diagnostics.Menus;
+using DevExpress.CodeRush.Interop.OLE;
 using DevExpress.CodeRush.Menus;
 using DevExpress.CodeRush.PlugInCore;
 
@@ -122,11 +123,11 @@ namespace CR_CodeTweet
 		{
 			if (!this.Available)
 			{
-				ea.Status = EnvDTE.vsCommandStatus.vsCommandStatusUnsupported;
+				ea.CommandFlags = OLECMDF.OLECMDF_DEFHIDEONCTXTMENU;
 			}
 			else
 			{
-				ea.Status = EnvDTE.vsCommandStatus.vsCommandStatusEnabled | EnvDTE.vsCommandStatus.vsCommandStatusSupported;
+				ea.CommandFlags = OLECMDF.OLECMDF_ENABLED | OLECMDF.OLECMDF_SUPPORTED;
 			}
 		}
 
@@ -282,7 +283,7 @@ namespace CR_CodeTweet
 
 			try
 			{
-				Log.Enter("CR_CodeTweet: posting and tweeting.");
+				Log.SendMsg("CR_CodeTweet: posting and tweeting.");
 
 				snippetInfo = PostSnippetToCodePaste(options, snippet);
 
@@ -351,10 +352,6 @@ namespace CR_CodeTweet
 				// Tell the user we basically have to throw up our hands for now.
 				string message = String.Format(CultureInfo.CurrentUICulture, "{0}{2}{2}{1}", Properties.Resources.Dialog_UnexpectedException, ex.Message, Environment.NewLine);
 				MessageBox.Show(message, Properties.Resources.Dialog_TweetFailedTitle, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-			}
-			finally
-			{
-				Log.Exit();
 			}
 		}
 

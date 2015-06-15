@@ -18,14 +18,13 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ##Requirements
 
-This product requires **DXCore for Visual Studio .NET 9.2.9.0 or later.**
+This product requires **CodeRush for Visual Studio .NET 14.2 or later.**
 
-DXCore is a free download from Developer Express, Inc.: [http://www.devexpress.com/Products/Visual_Studio_Add-in/DXCore/](http://www.devexpress.com/Products/Visual_Studio_Add-in/DXCore/)
+CodeRush is a Visual Studio extension from Developer Express, Inc.: https://www.devexpress.com/Products/CodeRush/
 
 ##Installation
 
-1. Make sure all instances of Visual Studio are closed.
-1. Copy the CR_CodeTweet.dll assembly into your DXCore plug-ins folder.  This is typically something like: `C:\Documents and Settings\YOURUSERNAME\My Documents\DevExpress\IDE Tools\Community\PlugIns` OR `C:\Program Files\DevExpress 2009.1\IDETools\Community\PlugIns`
+1. [Install the add-in via the Visual Studio extension gallery.](https://visualstudiogallery.msdn.microsoft.com/668a65b5-2468-4afa-b78d-8c369850e2b2)
 1. Start Visual Studio.
 1. From the DevExpress menu, select "Options."
 1. Expand the "Editor" folder in the list of options and select the "CodeTweet" option panel.
