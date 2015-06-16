@@ -9,6 +9,7 @@ using DevExpress.CodeRush.Diagnostics.Menus;
 using DevExpress.CodeRush.Interop.OLE;
 using DevExpress.CodeRush.Menus;
 using DevExpress.CodeRush.PlugInCore;
+using TweetSharp;
 
 namespace CR_CodeTweet
 {
@@ -504,15 +505,11 @@ namespace CR_CodeTweet
 					progress.Show();
 					Log.Send("Tweeting the snippet.");
 					progress.StatusMessage = Properties.Resources.Progress_PostingTweet;
-					TwitterInfoProvider infoProvider = new TwitterInfoProvider()
-					{
-						Token = options.TwitterOAuthToken,
-						TokenSecret = options.TwitterOAuthTokenSecret,
-						Verifier = options.TwitterOAuthPin
-					};
-					TwitterClient twitterClient = new TwitterClient(infoProvider);
-					twitterClient.Tweet(tweetContent);
-					Log.Send("Tweet sent!");
+
+					var service = new TwitterService(TwitterClientInfoProvider.ClientInfo);
+					service.AuthenticateWith(options.TwitterUserInfo.AccessToken, options.TwitterUserInfo.AccessTokenSecret);
+					var status = service.SendTweet(new SendTweetOptions { Status = tweetContent });
+					Log.Send("Tweet sent!", status.Id);
 					progress.StatusMessage = Properties.Resources.Progress_PostedTweet;
 					MessageBox.Show(Properties.Resources.Dialog_TweetSentMessage, Properties.Resources.Dialog_TweetSentTitle);
 				}

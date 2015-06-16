@@ -130,11 +130,7 @@
     </Compile>
     <Compile Include="DecoupledStorageExtensions.cs" />
     <Compile Include="DictionaryExtensions.cs" />
-    <Compile Include="IOAuthInfoProvider.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="OAuthRequestType.cs" />
-    <Compile Include="OAuthSignature.cs" />
-    <Compile Include="OAuthSignatureBuilder.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="PluginOptions.cs">
       <SubType>UserControl</SubType>
@@ -171,20 +167,19 @@
       <DependentUpon>TweetDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TweetFailedException.cs" />
-    <Compile Include="TwitterClient.cs" />
-    <Compile Include="TwitterInfoProvider.cs" />
+    <Compile Include="TwitterClientInfoProvider.cs" />
     <Compile Include="TwitterPinDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TwitterPinDialog.Designer.cs">
       <DependentUpon>TwitterPinDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="TwitterUserInfo.cs" />
     <Compile Include="Web References\CodePaste\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="WebRequestMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VsixPluginExtension.cs" />

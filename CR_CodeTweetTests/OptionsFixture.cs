@@ -47,7 +47,7 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterPinEmpty()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthPin = "";
+			options.TwitterUserInfo.Verifier = "";
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
@@ -56,7 +56,7 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterPinNull()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthPin = null;
+			options.TwitterUserInfo.Verifier = null;
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
@@ -65,7 +65,7 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterTokenEmpty()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthToken = "";
+			options.TwitterUserInfo.AccessToken = "";
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
@@ -74,7 +74,7 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterTokenNull()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthToken = null;
+			options.TwitterUserInfo.AccessToken = null;
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
@@ -83,7 +83,7 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterTokenSecretEmpty()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthTokenSecret = "";
+			options.TwitterUserInfo.AccessTokenSecret = "";
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
@@ -92,22 +92,24 @@ namespace CR_CodeTweetTests
 		public void Options_Validate_TwitterTokenSecretNull()
 		{
 			Options options = this.CreateValidOptions();
-			options.TwitterOAuthTokenSecret = null;
+			options.TwitterUserInfo.AccessTokenSecret = null;
 			string actual = options.Validate();
 			Assert.IsNotNull(actual, "A validation message should have been returned.");
 		}
 
 		private Options CreateValidOptions()
 		{
-			Options options = new Options()
+			return new Options()
 			{
 				CodePastePassword = "password",
 				CodePasteUsername = "username",
-				TwitterOAuthPin = "pin",
-				TwitterOAuthToken = "token",
-				TwitterOAuthTokenSecret = "tokensecret"
+				TwitterUserInfo = new TwitterUserInfo
+				{
+					AccessToken = "token",
+					AccessTokenSecret = "tokensecret",
+					Verifier = "pin"
+				}
 			};
-			return options;
 		}
 	}
 }

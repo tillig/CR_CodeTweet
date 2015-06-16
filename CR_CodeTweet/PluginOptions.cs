@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevExpress.CodeRush.Common;
 using DevExpress.CodeRush.Core;
 using DevExpress.CodeRush.Diagnostics.Menus;
+using TweetSharp;
 
 namespace CR_CodeTweet
 {
@@ -54,7 +55,7 @@ namespace CR_CodeTweet
 		{
 			base.Initialize();
 			this.versionLabel.Text = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			this.twitterLink.Links.Add(0, this.twitterLink.Text.Length, "http://twitter.com");
+			this.twitterLink.Links.Add(0, this.twitterLink.Text.Length, "https://twitter.com");
 			this.codepasteLink.Links.Add(0, this.codepasteLink.Text.Length, "http://codepaste.net");
 			this.PopulateFormFromStorage(PluginOptions.Storage);
 		}
@@ -79,9 +80,13 @@ namespace CR_CodeTweet
 			Options options = new Options();
 			options.CodePastePassword = this.codepastePasswordText.Text;
 			options.CodePasteUsername = this.codepasteUsernameText.Text;
-			options.TwitterOAuthPin = this._twitterPin;
-			options.TwitterOAuthToken = this._twitterAccessToken;
-			options.TwitterOAuthTokenSecret = this._twitterAccessTokenSecret;
+			options.TwitterUserInfo = new TwitterUserInfo
+			{
+				AccessToken = this._twitterAccessToken,
+				AccessTokenSecret = this._twitterAccessTokenSecret,
+				Verifier = this._twitterPin
+			};
+
 			Options.Save(PluginOptions.Storage, options);
 		}
 
@@ -104,9 +109,9 @@ namespace CR_CodeTweet
 			Options options = Options.Load(storage);
 			this.codepastePasswordText.Text = options.CodePastePassword;
 			this.codepasteUsernameText.Text = options.CodePasteUsername;
-			this._twitterPin = options.TwitterOAuthPin;
-			this._twitterAccessToken = options.TwitterOAuthToken;
-			this._twitterAccessTokenSecret = options.TwitterOAuthTokenSecret;
+			this._twitterPin = options.TwitterUserInfo.Verifier;
+			this._twitterAccessToken = options.TwitterUserInfo.AccessToken;
+			this._twitterAccessTokenSecret = options.TwitterUserInfo.AccessTokenSecret;
 		}
 
 		/// <summary>
@@ -125,14 +130,11 @@ namespace CR_CodeTweet
 				return;
 			}
 
-			// In the auth process we want to start with a "blank slate"
-			// provider - none of the existing PIN or token info - so
-			// create a new one and use that.
-			TwitterInfoProvider infoProvider = new TwitterInfoProvider();
-
+			var service = new TwitterService(TwitterClientInfoProvider.ClientInfo);
+			OAuthRequestToken requestToken = null;
 			try
 			{
-				this.SendUserToGetTwitterPin(infoProvider);
+				requestToken = this.SendUserToGetTwitterPin(service);
 			}
 			catch
 			{
@@ -143,16 +145,20 @@ namespace CR_CodeTweet
 
 			// Info provider has been updated to store the request token now.
 			// It can be used with the PIN to get an access token. Get the PIN.
-			TwitterPinDialog pinDialog = new TwitterPinDialog();
+			var pinDialog = new TwitterPinDialog();
 			if (DialogResult.OK != pinDialog.ShowDialog())
 			{
 				return;
 			}
-			infoProvider.Verifier = pinDialog.TwitterPin;
+
+			var userInfo = new TwitterUserInfo
+			{
+				Verifier = pinDialog.TwitterPin
+			};
 
 			try
 			{
-				this.SendUserToGetTwitterAccessToken(infoProvider);
+				this.SendUserToGetTwitterAccessToken(service, requestToken, userInfo);
 			}
 			catch
 			{
@@ -164,13 +170,13 @@ namespace CR_CodeTweet
 			// On successful authorization, save the verifier, access token, and access token secret to storage.
 			// We don't wait for an "OK" and we don't decline saving the settings
 			// on "Cancel" because, as far as Twitter's concerned, it's already done.
-			Options.SaveTwitterInfo(PluginOptions.Storage, infoProvider.Verifier, infoProvider.Token, infoProvider.TokenSecret);
+			Options.SaveTwitterInfo(PluginOptions.Storage, userInfo);
 
 			// Update instance fields with the values so if the user clicks OK they won't be lost.
 			// These fields get loaded/saved with the rest of the options.
-			this._twitterPin = infoProvider.Verifier;
-			this._twitterAccessToken = infoProvider.Token;
-			this._twitterAccessTokenSecret = infoProvider.TokenSecret;
+			this._twitterPin = userInfo.Verifier;
+			this._twitterAccessToken = userInfo.AccessToken;
+			this._twitterAccessTokenSecret = userInfo.AccessTokenSecret;
 
 			Log.Send("Successfully authorized CR_CodeTweet with Twitter.");
 			MessageBox.Show(Properties.Resources.Dialog_GetTwitterPinSuccess,
@@ -184,18 +190,38 @@ namespace CR_CodeTweet
 		/// for an access token.
 		/// </summary>
 		/// <exception cref="System.ArgumentNullException">
-		/// Thrown if <paramref name="infoProvider" /> is <see langword="null" />.
+		/// Thrown if <paramref name="service" />, <paramref name="requestToken" />, or <paramref name="userInfo" /> is <see langword="null" />.
 		/// </exception>
-		public void SendUserToGetTwitterAccessToken(IOAuthInfoProvider infoProvider)
+		/// <exception cref="System.ArgumentException">
+		/// Thrown if the <paramref name="userInfo" /> verifier is <see langword="null" /> or empty.
+		/// </exception>
+		public void SendUserToGetTwitterAccessToken(TwitterService service, OAuthRequestToken requestToken, TwitterUserInfo userInfo)
 		{
-			if (infoProvider == null)
+			if (service == null)
 			{
-				throw new ArgumentNullException("infoProvider");
+				throw new ArgumentNullException("service");
 			}
+
+			if (requestToken == null)
+			{
+				throw new ArgumentNullException("requestToken");
+			}
+
+			if (userInfo == null)
+			{
+				throw new ArgumentNullException("userInfo");
+			}
+
+			if (String.IsNullOrEmpty(userInfo.Verifier))
+			{
+				throw new ArgumentException("Verification PIN may not be null or empty.", "userInfo");
+			}
+
 			try
 			{
-				TwitterClient client = new TwitterClient(infoProvider);
-				client.GetAccessToken();
+				var access = service.GetAccessToken(requestToken, userInfo.Verifier);
+				userInfo.AccessToken = access.Token;
+				userInfo.AccessTokenSecret = access.TokenSecret;
 			}
 			catch (HttpException ex)
 			{
@@ -204,6 +230,7 @@ namespace CR_CodeTweet
 					Properties.Resources.Dialog_GetTwitterPinTitle,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+				throw;
 			}
 			catch (Exception ex)
 			{
@@ -212,26 +239,32 @@ namespace CR_CodeTweet
 					Properties.Resources.Dialog_GetTwitterPinTitle,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+				throw;
 			}
 		}
 
 		/// <summary>
 		/// Opens the user's browser and sends them to the Twitter authorization page.
 		/// </summary>
+		/// <param name="service">
+		/// The service to use for Twitter communication.
+		/// </param>
 		/// <exception cref="System.ArgumentNullException">
-		/// Thrown if <paramref name="infoProvider" /> is <see langword="null" />.
+		/// Thrown if <paramref name="service" /> is <see langword="null" />.
 		/// </exception>
-		public void SendUserToGetTwitterPin(IOAuthInfoProvider infoProvider)
+		public OAuthRequestToken SendUserToGetTwitterPin(TwitterService service)
 		{
-			if (infoProvider == null)
+			if (service == null)
 			{
-				throw new ArgumentNullException("infoProvider");
+				throw new ArgumentNullException("service");
 			}
+
 			try
 			{
-				TwitterClient client = new TwitterClient(infoProvider);
-				Uri authorizeUrl = client.GetAuthorizationUrl();
+				var requestToken = service.GetRequestToken();
+				var authorizeUrl = service.GetAuthorizationUri(requestToken);
 				System.Diagnostics.Process.Start(authorizeUrl.AbsoluteUri);
+				return requestToken;
 			}
 			catch (HttpException ex)
 			{
@@ -240,6 +273,7 @@ namespace CR_CodeTweet
 					Properties.Resources.Dialog_GetTwitterPinTitle,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+				throw;
 			}
 			catch (Exception ex)
 			{
@@ -248,6 +282,7 @@ namespace CR_CodeTweet
 					Properties.Resources.Dialog_GetTwitterPinTitle,
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
+				throw;
 			}
 		}
 	}

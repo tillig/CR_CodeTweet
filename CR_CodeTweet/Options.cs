@@ -35,31 +35,13 @@ namespace CR_CodeTweet
 		public string CodePastePassword { get; set; }
 
 		/// <summary>
-		/// Gets or sets the Twitter OAuth PIN.
+		/// Gets or sets the Twitter user information.
 		/// </summary>
 		/// <value>
-		/// A <see cref="System.String"/> with the PIN that should be used to
-		/// authenticate via OAuth to Twitter.
+		/// A <see cref="TwitterUserInfo"/> with the user's
+		/// access token information.
 		/// </value>
-		public string TwitterOAuthPin { get; set; }
-
-		/// <summary>
-		/// Gets or sets the Twitter OAuth access token.
-		/// </summary>
-		/// <value>
-		/// A <see cref="System.String"/> with the access token that should be used to
-		/// authenticate via OAuth to Twitter.
-		/// </value>
-		public string TwitterOAuthToken { get; set; }
-
-		/// <summary>
-		/// Gets or sets the Twitter OAuth access token secret.
-		/// </summary>
-		/// <value>
-		/// A <see cref="System.String"/> with the access token secret that should be used to
-		/// authenticate via OAuth to Twitter.
-		/// </value>
-		public string TwitterOAuthTokenSecret { get; set; }
+		public TwitterUserInfo TwitterUserInfo { get; set; }
 
 		/// <summary>
 		/// Loads the plugin options.
@@ -79,12 +61,17 @@ namespace CR_CodeTweet
 			{
 				throw new ArgumentNullException("storage");
 			}
+
 			Options options = new Options();
 			options.CodePastePassword = storage.ReadEncryptedString(SectionId, CodePastePasswordKey, "");
 			options.CodePasteUsername = storage.ReadEncryptedString(SectionId, CodePasteUsernameKey, "");
-			options.TwitterOAuthPin = storage.ReadEncryptedString(SectionId, TwitterOAuthPinKey, "");
-			options.TwitterOAuthToken = storage.ReadEncryptedString(SectionId, TwitterOAuthTokenKey, "");
-			options.TwitterOAuthTokenSecret = storage.ReadEncryptedString(SectionId, TwitterOAuthTokenSecretKey, "");
+			options.TwitterUserInfo = new TwitterUserInfo
+			{
+				AccessToken = storage.ReadEncryptedString(SectionId, TwitterOAuthTokenKey, ""),
+				AccessTokenSecret = storage.ReadEncryptedString(SectionId, TwitterOAuthTokenSecretKey, ""),
+				Verifier = storage.ReadEncryptedString(SectionId, TwitterOAuthPinKey, "")
+			};
+
 			return options;
 		}
 
@@ -112,7 +99,7 @@ namespace CR_CodeTweet
 			}
 			storage.WriteEncryptedString(SectionId, CodePastePasswordKey, options.CodePastePassword);
 			storage.WriteEncryptedString(SectionId, CodePasteUsernameKey, options.CodePasteUsername);
-			SaveTwitterInfo(storage, options.TwitterOAuthPin, options.TwitterOAuthToken, options.TwitterOAuthTokenSecret);
+			SaveTwitterInfo(storage, options.TwitterUserInfo);
 			storage.Update();
 		}
 
@@ -122,21 +109,27 @@ namespace CR_CodeTweet
 		/// <param name="storage">
 		/// The storage location to which options should be saved.
 		/// </param>
-		/// <param name="verifier">The Twitter verifier PIN.</param>
-		/// <param name="accessToken">The Twitter access token.</param>
-		/// <param name="accessTokenSecret">The Twitter access token secret.</param>
+		/// <param name="userInfo">
+		/// The Twitter user info with the verifier PIN, access token, and access token secret.
+		/// </param>
 		/// <exception cref="System.ArgumentNullException">
-		/// Thrown if <paramref name="storage" /> is <see langword="null" />.
+		/// Thrown if <paramref name="storage" /> or <paramref name="userInfo" /> is <see langword="null" />.
 		/// </exception>
-		public static void SaveTwitterInfo(IDecoupledStorage storage, string verifier, string accessToken, string accessTokenSecret)
+		public static void SaveTwitterInfo(IDecoupledStorage storage, TwitterUserInfo userInfo)
 		{
 			if (storage == null)
 			{
 				throw new ArgumentNullException("storage");
 			}
-			storage.WriteEncryptedString(SectionId, TwitterOAuthPinKey, verifier);
-			storage.WriteEncryptedString(SectionId, TwitterOAuthTokenKey, accessToken);
-			storage.WriteEncryptedString(SectionId, TwitterOAuthTokenSecretKey, accessTokenSecret);
+
+			if (userInfo == null)
+			{
+				throw new ArgumentNullException("userInfo");
+			}
+
+			storage.WriteEncryptedString(SectionId, TwitterOAuthPinKey, userInfo.Verifier);
+			storage.WriteEncryptedString(SectionId, TwitterOAuthTokenKey, userInfo.AccessToken);
+			storage.WriteEncryptedString(SectionId, TwitterOAuthTokenSecretKey, userInfo.AccessTokenSecret);
 			storage.Update();
 		}
 
@@ -155,7 +148,7 @@ namespace CR_CodeTweet
 			{
 				message = Properties.Resources.Options_CodePasteNotConfigured;
 			}
-			else if (String.IsNullOrEmpty(this.TwitterOAuthPin) || String.IsNullOrEmpty(this.TwitterOAuthToken) || String.IsNullOrEmpty(this.TwitterOAuthTokenSecret))
+			else if (String.IsNullOrEmpty(this.TwitterUserInfo.Verifier) || String.IsNullOrEmpty(this.TwitterUserInfo.AccessToken) || String.IsNullOrEmpty(this.TwitterUserInfo.AccessTokenSecret))
 			{
 				message = Properties.Resources.Options_TwitterNotConfigured;
 			}
